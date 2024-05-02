@@ -52,6 +52,17 @@ t_data	*init(void);
 t_data	*init_data(void);
 t_data	*init(void);
 
+int		map_lines(char *file);
+void	map_check(char *file, t_data *data);
+char	**file_to_map(char *file);
+void	fill(char **layout_cpy, t_data *data, int x, int y);
+int		comp1_check(t_data *data);
+int		comp3_check(t_data *data, int start_exit);
+int		path_check(char *file, t_data *data);
+int		strlen_solong(char	*str);
+int		comp2_check(t_data *data, int x, int y);
+int		dimension_check(t_data *data);
+
 int 	render(t_data *data);
 int 	render_win(t_data *data);
 
@@ -59,6 +70,7 @@ int		render_map(t_data *data);
 void	render_wall_corner(t_data *data, int y, int x);
 void	render_wall_border(t_data *data, int y, int x);
 void	render_tile(t_data *data, int y, int x);
+int		wall_check(t_data *data);
 
 void	init_img1(t_data *data);
 void	init_img2(t_data *data);

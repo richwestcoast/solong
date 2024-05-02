@@ -92,9 +92,16 @@ t_list				*ft_lstmap(t_list *lst, \
 						void *(*f)(void *), void (*del)(void *));
 
 char				*ft_strtok(char *str, char sepa);
-int					get_next_line(int fd, char **line);
 int					is_newline(char *backup);
 int					split_line(char **backup, char **line, int cut_idx);
 int					return_all(char **backup, char **line, int read_size);
+
+char				*get_next_line(int fd);
+char				*ft_new_left_str(char *left_str);
+char				*ft_get_ret_str(char *left_str);
+char				*read2left_str(int fd, char *left_str);
+char				*gnlft_strchr(char *s, int c);
+char				*gnlft_strjoin(char *s1, char *s2);
+size_t				gnlft_strlen( char *str);
 
 #endif
