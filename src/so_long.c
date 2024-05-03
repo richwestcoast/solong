@@ -80,7 +80,7 @@ char	**file_to_map(char *file)
 		map[i] = get_next_line(fd);
 		if (!map[i] || map[i][0] == '\r')
 		{
-			//free_array(map, lines);
+			free_array(map, lines);
 			close(fd);
 			return (NULL);
 		}
@@ -89,6 +89,15 @@ char	**file_to_map(char *file)
 	return (map);
 }
 
+void	free_array(char **arr, int lines)
+{
+	int	i;
+
+	i = 0;
+	while (i <= lines)
+		free(arr[i++]);
+	free(arr);
+}
 
 int	dimension_check(t_data *data)
 {
@@ -174,20 +183,20 @@ int	path_check(char *file, t_data *data)
 	fill(layout_cpy, data, data->map->player.x, data->map->player.y);
 	if (!data->map->exit.y || !data->map->exit.x)
 	{
-		//free_array(layout_cpy, lines);
+		free_array(layout_cpy, lines);
 		return (1);
 	}
 	if (layout_cpy[data->map->exit.y][data->map->exit.x] != 'W')
 	{
-		//free_array(layout_cpy, lines);
+		free_array(layout_cpy, lines);
 		return (1);
 	}
 	if (data->map->collect != data->map->gathered)
 	{
-		//free_array(layout_cpy, lines);
+		free_array(layout_cpy, lines);
 		return (1);
 	}
-	//free_array(layout_cpy, lines);
+	free_array(layout_cpy, lines);
 	return (0);
 }
 
@@ -426,19 +435,27 @@ void	free_map(t_map *map)
 	free(map);
 }
 
+void print_coordinates(t_data *data){
+	ft_printf("Type of square: %c\n", data->map->layout[data->map->player.y][data->map->player.x - 1]);
+	ft_printf("Coordinates: Y: %i - ", data->map->player.y);
+	ft_printf("X: %i \n", data->map->player.x);
+	ft_printf("Collectibles: %i left\n", data->map->gathered);
+}
+
 void	move_up(t_data *data)
 {
-	if (data->map->layout[data->map->player.y - 1][data->map->player.x] == "C")
+	//print_coordinates(data);
+	if (data->map->layout[data->map->player.y - 1][data->map->player.x] == 'C')
 	{
-		ft_printf("\033[1;37mINFO:\033[0m%i collectables left\n", data->map->gathered);
 		data->map->gathered--;
 		data->map->layout[data->map->player.y - 1][data->map->player.x] = 'C';
 	}
 	if (data->map->layout[data->map->player.y - 1][data->map->player.x] == '1'
 		|| (data->map->layout[data->map->player.y - 1]
-			[data->map->player.x] == 'E' && data->map->gathered != 0))
-		return ;
-	else
+			[data->map->player.x] == 'E' && data->map->gathered >= 1)) {
+		ft_printf("%i", data->map->gathered);
+		return;
+	}else
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->tiles[10],
 								data->map->player.x * SIZE, data->map->player.y * SIZE);
@@ -452,6 +469,7 @@ void	move_up(t_data *data)
 
 void	move_down(t_data *data)
 {
+	//print_coordinates(data);
 	if (data->map->layout[data->map->player.y + 1][data->map->player.x] == 'C')
 	{
 		data->map->gathered--;
@@ -459,7 +477,7 @@ void	move_down(t_data *data)
 	}
 	if (data->map->layout[data->map->player.y + 1][data->map->player.x] == '1'
 		|| (data->map->layout[data->map->player.y + 1]
-			[data->map->player.x] == 'E' && data->map->gathered != 0))
+			[data->map->player.x] == 'E' && data->map->gathered >= 1))
 		return ;
 	else
 	{
@@ -475,6 +493,7 @@ void	move_down(t_data *data)
 
 void	move_right(t_data *data)
 {
+	//print_coordinates(data);
 	if (data->map->layout[data->map->player.y][data->map->player.x + 1] == 'C')
 	{
 		data->map->gathered--;
@@ -482,7 +501,7 @@ void	move_right(t_data *data)
 	}
 	if (data->map->layout[data->map->player.y][data->map->player.x + 1] == '1'
 		|| (data->map->layout[data->map->player.y]
-			[data->map->player.x + 1] == 'E' && data->map->gathered != 0))
+			[data->map->player.x + 1] == 'E' && data->map->gathered >= 1))
 		return ;
 	else
 	{
@@ -498,6 +517,8 @@ void	move_right(t_data *data)
 
 void	move_left(t_data *data)
 {
+	//print_coordinates(data);
+
 	if (data->map->layout[data->map->player.y][data->map->player.x - 1] == 'C')
 	{
 		data->map->gathered--;
@@ -505,9 +526,9 @@ void	move_left(t_data *data)
 	}
 	if (data->map->layout[data->map->player.y][data->map->player.x - 1] == '1'
 		|| (data->map->layout[data->map->player.y]
-			[data->map->player.x - 1] == 'E' && data->map->gathered != 0))
-		return ;
-	else
+			[data->map->player.x - 1] == 'E' && data->map->gathered >= 1)) {
+		return;
+	}else
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->tiles[10],
 								data->map->player.x * SIZE, data->map->player.y * SIZE);
@@ -558,17 +579,17 @@ t_data	*init_data(void)
 	if (!data)
 		return (data);
 	data->tiles = malloc(13 * sizeof(void *));
-//	if (!data->tiles)
-//	{
-//		free_game(data);
-//		return (data);
-//	}
+	if (!data->tiles)
+	{
+		free_game(data);
+		return (data);
+	}
 	data->map = malloc(sizeof(t_map));
-//	if (!data->map)
-//	{
-//		free_game(data);
-//		return (data);
-//	}
+	if (!data->map)
+	{
+		free_game(data);
+		return (data);
+	}
 	data->tile.y = SIZE;
 	data->tile.x = SIZE;
 //	init_null(data);

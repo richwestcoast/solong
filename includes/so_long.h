@@ -66,6 +66,8 @@ int		dimension_check(t_data *data);
 int 	render(t_data *data);
 int 	render_win(t_data *data);
 
+void	free_array(char **arr, int lines);
+
 int		render_map(t_data *data);
 void	render_wall_corner(t_data *data, int y, int x);
 void	render_wall_border(t_data *data, int y, int x);
