@@ -79,10 +79,10 @@ void	init_img2(t_data *data);
 
 t_data	*init_data(void);
 int		handle_keypress(int keysym, t_data *data);
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_right(t_data *data);
-void	move_left(t_data *data);
+void	up(t_data *data);
+void	down(t_data *data);
+void	right(t_data *data);
+void	left(t_data *data);
 
 int		ft_quit(t_data *data);
 int		free_game(t_data *data);

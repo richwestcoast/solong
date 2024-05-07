@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leschenb <leschenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rwinder <rwinder@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 14:03:58 by leschenb          #+#    #+#             */
-/*   Updated: 2023/09/04 17:35:20 by leschenb         ###   ########.fr       */
+/*   Created: 2023/02/01 16:20:00 by rwinder           #+#    #+#             */
+/*   Updated: 2023/09/04 16:20:00 by rwinder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
