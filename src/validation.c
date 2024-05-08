@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/so_long.h"
 
 void	map_check(char *file, t_data *data)
@@ -46,7 +45,7 @@ int	wall_check(t_data *data)
 		if (y == 0 || y == data->map->lines - 1)
 		{
 			while (data->map->layout[y][++x] != '\n'
-				   && data->map->layout[y][x] != '\0')
+				&& data->map->layout[y][x] != '\0')
 			{
 				if (data->map->layout[y][x] != '1')
 					return (1);
@@ -56,9 +55,38 @@ int	wall_check(t_data *data)
 		{
 			if (data->map->layout[y][0] != '1'
 				|| data->map->layout[y]
-				   [ft_strlen(data->map->layout[y]) - 2] != '1')
+					[ft_strlen(data->map->layout[y]) - 2] != '1')
 				return (1);
 		}
 	}
 	return (0);
+}
+
+int	free_game(t_data *data)
+{
+	if (!data)
+		return (0);
+	if (data->tiles)
+		free_tiles(data);
+	if (data->img.mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+		mlx_destroy_display(data->mlx_ptr);
+	if (data->map)
+		free_map(data->map);
+	free(data->mlx_ptr);
+	free(data);
+	return (0);
+}
+
+void	free_tiles(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 13)
+		mlx_destroy_image(data->mlx_ptr, data->tiles[i++]);
+	free(data->tiles);
 }

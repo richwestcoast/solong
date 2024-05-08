@@ -7,7 +7,7 @@ DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 NAME = so_long
 NAME_BONUS = so_long_bonus
 
-SRC = src/so_long.c src/movements.c src/libx.c src/validation.c src/initializing.c
+SRC = src/checks.c src/helpers.c src/so_long.c src/movements.c src/libx.c src/validation.c src/initializing.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = libs/libft/libft.a
