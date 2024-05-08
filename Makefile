@@ -15,10 +15,10 @@ LIBFT = libs/libft/libft.a
 all: libs $(NAME)
 
 $(LIBFT):
-	#$(MAKE) -C ./libs/libft
+	$(MAKE) -C ./libs/libft
 
 libs:
-	#$(MAKE) -C ./libs/minilibx-linux
+	$(MAKE) -C ./libs/minilibx-linux
 	
 $(NAME): $(OBJ) $(libs) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
@@ -26,8 +26,8 @@ $(NAME): $(OBJ) $(libs) $(LIBFT)
 
 
 clean:
-	#$(MAKE) $@ -C ./libs/libft
-	#$(MAKE) $@ -C ./libs/minilibx-linux
+	$(MAKE) $@ -C ./libs/libft
+	$(MAKE) $@ -C ./libs/minilibx-linux
 	@rm -rf $(OBJ)
 
 fclean: clean
@@ -35,5 +35,5 @@ fclean: clean
 	@rm -rf $(NAME)
 
 re: fclean all
-	#$(MAKE) re -C ./libs/libft
-	#$(MAKE) re -C ./libs/minilibx-linux
+	$(MAKE) re -C ./libs/libft
+	$(MAKE) re -C ./libs/minilibx-linux
