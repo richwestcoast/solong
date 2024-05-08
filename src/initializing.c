@@ -33,7 +33,7 @@ t_data	*init_data(void)
 	}
 	data->tile.y = SIZE;
 	data->tile.x = SIZE;
-	init_null(data);
+	//init_null(data);
 	return (data);
 }
 
