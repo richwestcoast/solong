@@ -1,6 +1,5 @@
 CC = cc
-#CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror -g
 MLXFLAGS = -L ./libs/minilibx-linux -lm -lmlx -Ilmlx -lXext -lX11 
 DEPS = libs/minilibx-linux/mlx.h libs/libft/libft.a
 
@@ -16,9 +15,6 @@ all: libs $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C ./libs/libft
-
-libs:
-	$(MAKE) -C ./libs/minilibx-linux
 	
 $(NAME): $(OBJ) $(libs) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
@@ -27,7 +23,6 @@ $(NAME): $(OBJ) $(libs) $(LIBFT)
 
 clean:
 	$(MAKE) $@ -C ./libs/libft
-	$(MAKE) $@ -C ./libs/minilibx-linux
 	@rm -rf $(OBJ)
 
 fclean: clean
@@ -36,4 +31,3 @@ fclean: clean
 
 re: fclean all
 	$(MAKE) re -C ./libs/libft
-	$(MAKE) re -C ./libs/minilibx-linux

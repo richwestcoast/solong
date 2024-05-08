@@ -17,6 +17,7 @@ int	main(int ac, char **av)
 {
 	t_data	*data;
 
+	(void) ac;
 	data = init();
 	map_check(av[1], data);
 	render(data);
