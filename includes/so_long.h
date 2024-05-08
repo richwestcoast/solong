@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rwinder <rwinder@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 16:20:00 by rwinder           #+#    #+#             */
+/*   Updated: 2023/09/06 16:20:00 by rwinder          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -63,8 +75,7 @@ int		strlen_solong(char	*str);
 int		comp2_check(t_data *data, int x, int y);
 int		dimension_check(t_data *data);
 
-int 	render(t_data *data);
-int 	render_win(t_data *data);
+int		render(t_data *data);
 
 void	free_array(char **arr, int lines);
 
